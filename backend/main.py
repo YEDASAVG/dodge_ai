@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 # Ensure backend/ is on the path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from config import GEMINI_API_KEY
 from graph_service import build_graph, get_summary
 from routers.graph import router as graph_router
 from routers.chat import router as chat_router
@@ -22,6 +23,8 @@ G = None
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global G
+    if not GEMINI_API_KEY:
+        print("⚠️  WARNING: GEMINI_API_KEY not set — chat endpoint will fail.")
     print("Building graph...")
     G = build_graph()
     summary = get_summary(G)

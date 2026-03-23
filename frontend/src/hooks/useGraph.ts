@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { fetchNeighbors, fetchSubgraph } from '../api/client';
 import type { GraphEdge, GraphNode, SubgraphResponse } from '../types';
 
@@ -15,19 +15,27 @@ export function useGraph(initialSample = 150): GraphState {
   const [edges, setEdges] = useState<GraphEdge[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const expandingRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
+    let cancelled = false;
     fetchSubgraph(initialSample)
       .then((data: SubgraphResponse) => {
+        if (cancelled) return;
         setNodes(data.nodes);
         setEdges(data.edges);
       })
-      .catch((err: Error) => setError(err.message))
-      .finally(() => setLoading(false));
+      .catch((err: Error) => { if (!cancelled) setError(err.message); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
   }, [initialSample]);
 
   const expandNode = useCallback(
     (nodeId: string, depth = 1, anchor?: { x: number; y: number }): Promise<void> => {
+      // Prevent duplicate concurrent expands for the same node
+      if (expandingRef.current.has(nodeId)) return Promise.resolve();
+      expandingRef.current.add(nodeId);
+
       const [nodeType, ...idParts] = nodeId.split(':');
       const id = idParts.join(':');
       return fetchNeighbors(nodeType, id, depth)
@@ -57,7 +65,8 @@ export function useGraph(initialSample = 150): GraphState {
             return [...prev, ...newEdges];
           });
         })
-        .catch((err: Error) => { setError(err.message); });
+        .catch((err: Error) => { setError(err.message); })
+        .finally(() => { expandingRef.current.delete(nodeId); });
     },
     [],
   );

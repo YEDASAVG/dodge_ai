@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import GraphCanvas from './components/GraphCanvas';
 import type { GraphCanvasHandle } from './components/GraphCanvas';
 import NodeDetail from './components/NodeDetail';
@@ -82,13 +82,22 @@ export default function App() {
 
 
 
-  const visibleNodes = hiddenTypes.size === 0 ? nodes : nodes.filter(n => !hiddenTypes.has(n.type));
-  const visibleNodeIds = new Set(visibleNodes.map(n => n.id));
-  const visibleEdges = hiddenTypes.size === 0 ? edges : edges.filter(e => {
-    const s = typeof e.source === 'object' ? (e.source as any).id : e.source;
-    const t = typeof e.target === 'object' ? (e.target as any).id : e.target;
-    return visibleNodeIds.has(s) && visibleNodeIds.has(t);
-  });
+  // Clean up search debounce on unmount
+  useEffect(() => () => { if (searchTimeout.current) clearTimeout(searchTimeout.current); }, []);
+
+  const visibleNodes = useMemo(
+    () => hiddenTypes.size === 0 ? nodes : nodes.filter(n => !hiddenTypes.has(n.type)),
+    [nodes, hiddenTypes],
+  );
+  const visibleNodeIds = useMemo(() => new Set(visibleNodes.map(n => n.id)), [visibleNodes]);
+  const visibleEdges = useMemo(
+    () => hiddenTypes.size === 0 ? edges : edges.filter(e => {
+      const s = typeof e.source === 'object' ? (e.source as any).id : e.source;
+      const t = typeof e.target === 'object' ? (e.target as any).id : e.target;
+      return visibleNodeIds.has(s) && visibleNodeIds.has(t);
+    }),
+    [edges, hiddenTypes, visibleNodeIds],
+  );
 
   if (loading) return (
     <div className="flex items-center justify-center h-screen bg-stone-100 dark:bg-zinc-950 transition-colors">
