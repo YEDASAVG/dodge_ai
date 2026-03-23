@@ -270,7 +270,7 @@ export default forwardRef(function GraphCanvas({ nodes, edges, onNodeClick, onNo
         <div className={`rounded-lg px-3 py-2 shadow-lg border text-xs whitespace-nowrap ${
           isDark
             ? 'bg-zinc-900/95 border-zinc-700/60 text-zinc-100'
-            : 'bg-white/95 border-gray-200 text-gray-900'
+            : 'bg-stone-50/95 border-gray-200 text-gray-900'
         }`}>
           <div className="font-semibold" style={{ color: NODE_COLORS[hoveredData.node.type] ?? '#6b7280' }}>
             {hoveredData.node.type}: {hoveredData.node.label}

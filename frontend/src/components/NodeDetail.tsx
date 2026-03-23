@@ -33,7 +33,7 @@ export default function NodeDetail({ node, onClose, onExpand, onAskChat }: Props
 
   return (
     <div
-      className="w-72 max-h-[calc(100vh-80px)] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm border border-gray-200 dark:border-zinc-700/50 rounded-xl shadow-2xl dark:shadow-black/50 overflow-hidden flex flex-col transition-colors"
+      className="w-72 max-h-[calc(100vh-80px)] bg-stone-50/95 dark:bg-zinc-900/95 backdrop-blur-sm border border-gray-200 dark:border-zinc-700/50 rounded-xl shadow-2xl dark:shadow-black/50 overflow-hidden flex flex-col transition-colors"
     >
       {/* Header */}
       <div className="p-4 pb-2 shrink-0">

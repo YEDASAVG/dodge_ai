@@ -91,7 +91,7 @@ export default function App() {
   });
 
   if (loading) return (
-    <div className="flex items-center justify-center h-screen bg-gray-50 dark:bg-zinc-950 transition-colors">
+    <div className="flex items-center justify-center h-screen bg-stone-100 dark:bg-zinc-950 transition-colors">
       <div className="flex flex-col items-center gap-3">
         <div className="w-8 h-8 border-2 border-gray-300 dark:border-zinc-700 border-t-blue-500 rounded-full animate-spin" />
         <span className="text-sm text-gray-500 dark:text-zinc-400">Loading graph…</span>
@@ -100,13 +100,13 @@ export default function App() {
   );
 
   if (error) return (
-    <div className="flex items-center justify-center h-screen bg-gray-50 dark:bg-zinc-950 text-red-500 transition-colors">Error: {error}</div>
+    <div className="flex items-center justify-center h-screen bg-stone-100 dark:bg-zinc-950 text-red-500 transition-colors">Error: {error}</div>
   );
 
   return (
-    <div className="relative w-screen h-screen flex flex-col overflow-hidden bg-gray-50 dark:bg-zinc-950 transition-colors duration-150">
+    <div className="relative w-screen h-screen flex flex-col overflow-hidden bg-stone-100 dark:bg-zinc-950 transition-colors duration-150">
       {/* ─── Header ─── */}
-      <header className="shrink-0 h-12 flex items-center px-5 border-b border-gray-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm z-30 transition-colors">
+      <header className="shrink-0 h-12 flex items-center px-5 border-b border-gray-200/80 dark:border-zinc-800/80 bg-stone-50/90 dark:bg-zinc-900/90 backdrop-blur-sm z-30 transition-colors">
         <div className="flex items-center gap-3">
           {/* Logo */}
           <div className="w-7 h-7 rounded-lg bg-zinc-900 dark:bg-white flex items-center justify-center shrink-0 transition-colors">
@@ -136,7 +136,7 @@ export default function App() {
             />
             {searching && <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-gray-400">…</span>}
             {searchResults.length > 0 && (
-              <div className="absolute top-full mt-1 left-0 w-64 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700/50 rounded-lg shadow-xl overflow-hidden z-50">
+              <div className="absolute top-full mt-1 left-0 w-64 bg-stone-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700/50 rounded-lg shadow-xl overflow-hidden z-50">
                 {searchResults.map(r => (
                   <button key={r.id} onClick={() => selectSearchResult(r)} className="w-full text-left px-3 py-2 text-xs text-gray-700 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-700/50 flex items-center gap-2 transition-colors">
                     <span className={`w-2 h-2 rounded-full shrink-0 ${DOT[r.type] ?? 'bg-gray-400'}`} />
@@ -183,7 +183,7 @@ export default function App() {
         {/* Graph area */}
         <div className="relative flex-1 h-full min-w-0">
           {/* Legend / type filter */}
-          <div className="absolute bottom-4 left-4 z-10 bg-white/90 dark:bg-zinc-900/90 backdrop-blur border border-gray-200/80 dark:border-zinc-700/50 rounded-xl shadow-lg p-3 transition-colors">
+          <div className="absolute bottom-4 left-4 z-10 bg-stone-50/90 dark:bg-zinc-900/90 backdrop-blur border border-gray-200/80 dark:border-zinc-700/50 rounded-xl shadow-lg p-3 transition-colors">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-2">Node Types</p>
               <div className="flex flex-col gap-1">
                 {NODE_TYPES.map(type => {
@@ -280,7 +280,7 @@ export default function App() {
       {/* ─── Help modal ─── */}
       {showHelp && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm" onClick={() => setShowHelp(false)}>
-          <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700/50 rounded-2xl p-6 max-w-md mx-4 shadow-2xl transition-colors" onClick={e => e.stopPropagation()}>
+          <div className="bg-stone-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700/50 rounded-2xl p-6 max-w-md mx-4 shadow-2xl transition-colors" onClick={e => e.stopPropagation()}>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">How to use the Graph</h2>
             <div className="space-y-3 text-sm text-gray-500 dark:text-zinc-400">
               {([

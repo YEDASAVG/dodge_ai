@@ -60,7 +60,7 @@ export default function ChatPanel({ messages, isLoading, onSend, onClear, onNode
   };
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-zinc-900/95 dark:backdrop-blur transition-colors">
+    <div className="flex flex-col h-full bg-stone-50 dark:bg-zinc-900/95 dark:backdrop-blur transition-colors">
       {/* Header */}
       <div className="px-5 py-4 border-b border-gray-100 dark:border-zinc-800 shrink-0">
         <div className="flex items-center justify-between">
