@@ -25,6 +25,14 @@ async def lifespan(app: FastAPI):
     global G
     if not GEMINI_API_KEY:
         print("⚠️  WARNING: GEMINI_API_KEY not set — chat endpoint will fail.")
+
+    # Auto-ingest if database doesn't exist yet
+    from config import DB_PATH
+    if not DB_PATH.exists():
+        print("Database not found — running ingestion...")
+        from ingestion import ingest
+        ingest()
+
     print("Building graph...")
     G = build_graph()
     summary = get_summary(G)

@@ -22,6 +22,7 @@ backend/.env
 
 # === Database ===
 *.db
+!o2c.db
 
 # === OS junk ===
 .DS_Store

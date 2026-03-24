@@ -20,11 +20,8 @@ COPY backend/ ./backend/
 # Copy pre-built frontend
 COPY --from=frontend-build /app/frontend/dist ./frontend/dist
 
-# Copy data & DB
+# Copy pre-built SQLite database (auto-ingestion runs on startup if missing)
 COPY o2c.db ./o2c.db
-
-# Copy SAP source data (needed for graph build if DB is rebuilt)
-# If you have sap-o2c-data/ in the same parent dir, mount it as a volume instead.
 
 EXPOSE 8000
 
