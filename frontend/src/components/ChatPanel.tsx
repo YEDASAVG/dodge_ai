@@ -65,8 +65,8 @@ export default function ChatPanel({ messages, isLoading, onSend, onClear, onNode
       <div className="px-5 py-4 border-b border-gray-100 dark:border-zinc-800 shrink-0">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-sm font-semibold text-gray-900 dark:text-zinc-100">Chat with Graph</h2>
-            <p className="text-xs text-gray-400 dark:text-zinc-500 mt-0.5">Graph</p>
+            <h2 className="text-sm font-semibold text-gray-900 dark:text-zinc-100">Dodge AI</h2>
+            <p className="text-xs text-gray-400 dark:text-zinc-500 mt-0.5">O2C Data Analyst</p>
           </div>
           <button
             onClick={onClear}
@@ -88,10 +88,10 @@ export default function ChatPanel({ messages, isLoading, onSend, onClear, onNode
           <div>
             <div className="flex items-baseline gap-2">
               <span className="text-sm font-semibold text-gray-900 dark:text-zinc-100">Dodge AI</span>
-              <span className="text-xs text-gray-400 dark:text-zinc-500">Graph Agent</span>
+              <span className="text-xs text-gray-400 dark:text-zinc-500">O2C Data Analyst</span>
             </div>
             <p className="text-sm text-gray-600 dark:text-zinc-300 mt-1 leading-relaxed">
-              Hi! I can help you explore and analyze this <strong className="font-semibold text-gray-900 dark:text-white">graph</strong>.
+              Ask me anything about your <strong className="font-semibold text-gray-900 dark:text-white">Order-to-Cash</strong> data — billing flows, sales orders, deliveries, and more.
             </p>
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function ChatPanel({ messages, isLoading, onSend, onClear, onNode
               <div className="max-w-[88%]">
                 <div className="flex items-baseline gap-2 mb-1">
                   <span className="text-sm font-semibold text-gray-900 dark:text-zinc-100">Dodge AI</span>
-                  <span className="text-xs text-gray-400 dark:text-zinc-500">Graph Agent</span>
+                  <span className="text-xs text-gray-400 dark:text-zinc-500">O2C Data Analyst</span>
                 </div>
 
                 {msg.sql && <SqlBlock sql={msg.sql} />}

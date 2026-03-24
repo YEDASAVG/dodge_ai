@@ -24,7 +24,7 @@ export default function App() {
   const { messages, isLoading: chatLoading, sendMessage, clearChat } = useChat();
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [chatOpen, setChatOpen] = useState(true);
-  const [chatWidth, setChatWidth] = useState(380);
+  const [chatWidth, setChatWidth] = useState(580);
 
   const [showHelp, setShowHelp] = useState(false);
 
@@ -32,7 +32,7 @@ export default function App() {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searching, setSearching] = useState(false);
   const searchTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
-  const [hiddenTypes, setHiddenTypes] = useState<Set<string>>(new Set(['JournalEntry']));
+  const [hiddenTypes, setHiddenTypes] = useState<Set<string>>(new Set());
   const graphRef = useRef<GraphCanvasHandle | null>(null);
 
   /** Expand a node — fetch its neighbors and add to graph */
